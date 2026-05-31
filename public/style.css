@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c23 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.controls select,
+.controls button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.controls button {
+    background: #ffd700;
+    color: #333;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.controls button:hover {
+    transform: scale(1.05);
+}
+
+.main-content {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.panel {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.panel h3 {
+    color: #2d5016;
+    margin-bottom: 12px;
+    font-size: 16px;
+    border-bottom: 2px solid #4a7c23;
+    padding-bottom: 8px;
+}
+
+.panel input,
+.panel select,
+.panel button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.panel button {
+    background: #4a7c23;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.panel button:hover {
+    background: #2d5016;
+}
+
+#speciesList {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.species-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    background: white;
+    border-radius: 6px;
+    border-left: 4px solid;
+}
+
+.species-item button {
+    width: auto;
+    padding: 4px 8px;
+    background: #dc3545;
+    margin: 0;
+}
+
+.canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.canvas-container {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.canvas-container h3 {
+    color: #2d5016;
+    margin-bottom: 10px;
+}
+
+canvas {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.pyramids {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.pyramid-container {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pyramid-container h3 {
+    color: #2d5016;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.simulation-controls {
+    background: #2d5016;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.simulation-controls button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#startSimBtn {
+    background: #28a745;
+    color: white;
+}
+
+#pauseSimBtn {
+    background: #ffc107;
+    color: #333;
+}
+
+.simulation-controls input[type="range"] {
+    width: 100px;
+}
+
+#generation {
+    margin-left: auto;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h3 {
+    color: #2d5016;
+    margin-bottom: 20px;
+}
+
+.save-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.save-item:hover {
+    background: #f8f9fa;
+}
+
+.save-item .save-name {
+    font-weight: bold;
+    color: #2d5016;
+}
+
+.save-item .save-date {
+    font-size: 12px;
+    color: #666;
+}
+
+#closeModal, #closeTemplateModal {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.template-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.template-item:hover {
+    background: #f8f9fa;
+    border-color: #4a7c23;
+}
+
+.template-item .template-name {
+    font-weight: bold;
+    color: #2d5016;
+    font-size: 16px;
+}
+
+.template-item .template-desc {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.species-info {
+    font-size: 11px;
+    color: #666;
+    margin-top: 3px;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物网能量流动模拟</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌿 食物网能量流动模拟</h1>
+            <div class="controls">
+                <select id="ecosystemType">
+                    <option value="grassland">草原生态系统</option>
+                    <option value="ocean">海洋生态系统</option>
+                    <option value="rainforest">热带雨林</option>
+                    <option value="temperate">温带森林</option>
+                    <option value="desert">沙漠生态系统</option>
+                    <option value="tundra">苔原生态系统</option>
+                </select>
+                <button id="loadTemplateBtn">📋 加载模板</button>
+                <button id="saveBtn">💾 保存</button>
+                <button id="loadBtn">📂 加载</button>
+                <button id="resetBtn">🔄 重置</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="panel">
+                    <h3>添加物种</h3>
+                    <input type="text" id="speciesName" placeholder="物种名称">
+                    <select id="trophicLevel">
+                        <option value="1">生产者 (第一营养级)</option>
+                        <option value="2">初级消费者 (第二营养级)</option>
+                        <option value="3">次级消费者 (第三营养级)</option>
+                        <option value="4">三级消费者 (第四营养级)</option>
+                    </select>
+                    <input type="number" id="population" placeholder="种群数量" min="1" value="100">
+                    <input type="number" id="energy" placeholder="个体能量" min="1" value="10">
+                    <input type="number" id="growthRate" placeholder="生长率 0-1" min="0" max="1" step="0.01" value="0.1">
+                    <input type="number" id="toxinSensitivity" placeholder="毒素敏感度" min="0" max="1" step="0.1" value="0.5">
+                    <input type="number" id="competitiveAbility" placeholder="竞争力" min="0" max="1" step="0.1" value="0.5">
+                    <button id="addSpeciesBtn">添加物种</button>
+                </div>
+
+                <div class="panel">
+                    <h3>定义食物关系</h3>
+                    <select id="predator">
+                        <option value="">选择捕食者</option>
+                    </select>
+                    <span style="font-size: 24px;">→</span>
+                    <select id="prey">
+                        <option value="">选择猎物</option>
+                    </select>
+                    <button id="addRelationBtn">添加关系</button>
+                </div>
+
+                <div class="panel">
+                    <h3>物种列表</h3>
+                    <div id="speciesList"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>扰动系统</h3>
+                    <select id="disturbanceType">
+                        <option value="drought">干旱</option>
+                        <option value="pollution">重金属污染</option>
+                        <option value="pesticide">农药污染</option>
+                        <option value="overhunting">过度捕猎</option>
+                        <option value="invasion">物种入侵</option>
+                        <option value="climateChange">气候变化</option>
+                    </select>
+                    <input type="number" id="disturbanceIntensity" placeholder="强度 0-1" min="0" max="1" step="0.1" value="0.5">
+                    <button id="applyDisturbanceBtn">应用扰动</button>
+                </div>
+            </aside>
+
+            <main class="canvas-area">
+                <div class="canvas-container">
+                    <h3>食物网可视化</h3>
+                    <canvas id="foodWebCanvas" width="600" height="400"></canvas>
+                </div>
+                <div class="pyramids">
+                    <div class="pyramid-container">
+                        <h3>能量金字塔</h3>
+                        <canvas id="energyPyramidCanvas" width="300" height="300"></canvas>
+                    </div>
+                    <div class="pyramid-container">
+                        <h3>数量金字塔</h3>
+                        <canvas id="numberPyramidCanvas" width="300" height="300"></canvas>
+                    </div>
+                    <div class="pyramid-container">
+                        <h3>生物富集金字塔</h3>
+                        <canvas id="toxinPyramidCanvas" width="300" height="300"></canvas>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div class="simulation-controls">
+            <button id="startSimBtn">▶️ 开始模拟</button>
+            <button id="pauseSimBtn">⏸️ 暂停模拟</button>
+            <span>速度: </span>
+            <input type="range" id="simSpeed" min="1" max="10" value="5">
+            <span id="simSpeedValue">5x</span>
+            <span id="generation">世代: 0</span>
+        </div>
+    </div>
+
+    <div id="loadModal" class="modal">
+        <div class="modal-content">
+            <h3>选择存档</h3>
+            <div id="saveList"></div>
+            <button id="closeModal">关闭</button>
+        </div>
+    </div>
+
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <h3>选择生态系统模板</h3>
+            <div id="templateList"></div>
+            <button id="closeTemplateModal">关闭</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
